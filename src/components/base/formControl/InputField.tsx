@@ -44,6 +44,7 @@ const InputField = (props: Props) => {
           placeholder={placeholder}
           type={type}
           InputProps={{ ...inputProps }}
+          fullWidth
         />
       )}
     />

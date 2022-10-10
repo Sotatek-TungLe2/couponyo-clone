@@ -10,11 +10,11 @@ export const schema = z.object({
     issuancePercent: z.number().positive({ message: ERR_MS.MS4 }).lte(100, { message: ERR_MS.MS3 }),
   }),
   issuanceClassification: z.string().trim().min(1, { message: ERR_MS.MS2 }),
-  paymentAcount: z.number().positive().gte(1000000, { message: ERR_MS.MS8 }),
+  paymentAcount: z.number().positive().lte(1000000, { message: ERR_MS.MS8 }),
   couponBenefits: z.object({
     typeBenefit: z.string().trim().min(1, { message: ERR_MS.MS2 }),
     benefitValue: z.number().positive({ message: ERR_MS.MS4 }),
-    maxDiscount: z.number().positive().gte(1000000, { message: ERR_MS.MS8 }),
+    maxDiscount: z.number().positive().lte(1000000, { message: ERR_MS.MS8 }),
   }),
   limitUse: z
     .object({
@@ -74,15 +74,15 @@ export const schema = z.object({
     sun: z.boolean(),
   }),
   useDate: z.object({
-    dateSelect: z.date().nullable().optional(),
+    dateSelect: z.string().nullable().optional(),
     value: z.string(),
   }),
   useTime: z
     .object({
-      startTime: z.date().nullable().optional(),
-      endTime: z.date().nullable().optional(),
-      startTimeValue: z.string(),
-      endTimeValue: z.string(),
+      startTime: z.date().nullable(),
+      endTime: z.date().nullable(),
+      startTimeValue: z.string().optional(),
+      endTimeValue: z.string().optional(),
     })
     .refine(
       (date) => {

@@ -9,10 +9,10 @@ type Props = {
 
 export default function HeadSubTitle({ children }: Props) {
   const SHeadTitle = styled(Typography)`
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     padding: 10px;
-    background-color: ${theme.palette.grey[100]};
+    background-color: ${theme.palette.grey[200]};
     margin: 0;
   `;
   return (

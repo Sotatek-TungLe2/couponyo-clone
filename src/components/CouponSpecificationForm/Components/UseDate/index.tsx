@@ -21,7 +21,7 @@ const UseDate = (props: Props) => {
   const { form, name, label, disabled = false, key } = props;
 
   const [isOpen, setIsOpen] = useState(false);
-  const dateData = JSON.parse(form.watch('useDate.value')) || [];
+  const dateData = form.watch('useDate.value') ? JSON.parse(form.watch('useDate.value')) : [];
 
   const handleChange = (event: Moment | null) => {
     if (dateData.length > 30 || event === null) return;
@@ -52,7 +52,7 @@ const UseDate = (props: Props) => {
               inputFormat="MM/DD/YYYY"
               value={value}
               onChange={(time: Moment | null) => {
-                onChange(time);
+                onChange(time?.format());
                 handleChange(time);
               }}
               {...rest}

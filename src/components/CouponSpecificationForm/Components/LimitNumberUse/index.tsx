@@ -1,9 +1,10 @@
 import { InputField, SwitchField } from '@base/formControl';
-import { FormHelperText } from '@mui/material';
+import styled from '@emotion/styled';
+import { Box, FormHelperText } from '@mui/material';
 import { Schema } from 'components/CouponSpecificationForm/utils/schema';
 import { ChangeEvent, useEffect } from 'react';
 import { UseFormReturn, useWatch } from 'react-hook-form';
-
+const fieldWidth = 210;
 type Props = {
   form: UseFormReturn<Schema>;
 };
@@ -18,11 +19,11 @@ const LimitNumberUse = ({ form }: Props) => {
 
   const onChange = (item: ChangeEvent<HTMLInputElement>) => {
     if (item.target.value) {
-      form.setValue('limitUse.limitUseValue', 0);
+      form.setValue('limitUse.limitUseValue', 1);
     }
   };
   return (
-    <>
+    <SWrapField>
       <SwitchField
         label="Per memberId"
         form={form}
@@ -41,8 +42,15 @@ const LimitNumberUse = ({ form }: Props) => {
           {errors.limitUse.message}
         </FormHelperText>
       )}
-    </>
+    </SWrapField>
   );
 };
-
+const SWrapField = styled(Box)`
+  display: flex;
+  // align-items: center;
+  & > * {
+    margin-right: 10px !important;
+    max-width: ${fieldWidth}px;
+  }
+`;
 export default LimitNumberUse;

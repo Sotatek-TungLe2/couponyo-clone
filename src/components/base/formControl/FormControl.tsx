@@ -1,17 +1,24 @@
 import styled from '@emotion/styled';
+import { Typography } from '@mui/material';
 import React, { ReactNode } from 'react';
 
 type Props = {
   children: ReactNode;
   label: string;
   id?: string;
+  guildText?: string;
 };
 
-function FormControl({ children, label, id = label }: Props) {
+function FormControl({ children, label, id = label, guildText }: Props) {
   return (
     <SWrapControl>
       <SLabel htmlFor={id}>{label}</SLabel>
       <SWrapFields>{children}</SWrapFields>
+      {!!guildText && (
+        <Typography variant="caption" display="block" gutterBottom>
+          {guildText}
+        </Typography>
+      )}
     </SWrapControl>
   );
 }

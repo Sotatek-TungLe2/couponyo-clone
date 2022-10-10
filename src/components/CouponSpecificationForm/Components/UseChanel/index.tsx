@@ -1,7 +1,7 @@
 import { CheckboxField, SwitchField } from '@base/formControl';
 import { Schema } from 'components/CouponSpecificationForm/utils/schema';
-import { ChangeEvent, useEffect } from 'react';
-import { UseFormReturn, useWatch } from 'react-hook-form';
+import { ChangeEvent } from 'react';
+import { UseFormReturn } from 'react-hook-form';
 
 type Chanel = 'app' | 'web';
 const chanels: Chanel[] = ['app', 'web'];
@@ -17,14 +17,11 @@ const UseChanel = ({ form }: Props) => {
     console.log(item.target.value);
 
     if (item.target.value) {
-      console.log('here 1231');
-
       // for (let i = 0; i < chanels.length; i++) {
       //   form.setValue(`useChanel.${chanels[i]}`, true);
       // }
       // chanels.forEach((item: Chanel) => {
       //   console.log(`useChanel.${item}`);
-
       //   form.setValue(`useChanel.${item}`, true);
       // });
     }

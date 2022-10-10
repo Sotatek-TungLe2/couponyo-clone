@@ -1,6 +1,7 @@
 export { default as CouponIssuanceSubject } from './CouponIssuanceSubject';
 export { default as CouponIssuanceClassification } from './CouponIssuanceClassification';
 export { default as CouponBenefits } from './CouponBenefits';
+export { default as MinimumPayment } from './MinimumPayment';
 export { default as LimitNumberUse } from './LimitNumberUse';
 export { default as MaximumUse } from './MaximumUse';
 export { default as UseDay } from './UseDay';
@@ -9,3 +10,4 @@ export { default as UseTime } from './UseTime';
 export { default as UseChanel } from './UseChanel';
 export { default as Yogipass } from './Yogipass';
 export { default as Ordertype } from './Ordertype';
+export { default as SubjectsApply } from './SubjectsApply';

@@ -11,20 +11,25 @@ import { Schema } from 'components/CouponSpecificationForm/utils/schema';
 const CouponDetail: FC = () => {
   const router = useRouter();
   const { id } = router.query;
-  const store = useSelector((state: StateType) => state.formReducer);
 
   const { setData } = useFormData();
 
   const localData = localStorage.getItem('couponDetail');
   const data: Schema = localData ? JSON.parse(localData) : null;
-
-  console.log('data', data);
+  const transData: Schema = {
+    ...data,
+    useTime: {
+      ...data.useTime,
+      endTime: data.useTime?.endTime ? new Date(data.useTime?.endTime) : null,
+      startTime: data.useTime?.startTime ? new Date(data.useTime?.startTime) : null,
+    },
+  };
 
   useEffect(() => {
-    if (data) setData(data);
+    if (transData) setData(transData);
   }, []);
 
-  return <>{data && <CouponForm couponData={data} isEdit />}</>;
+  return <>{transData && <CouponForm couponData={transData} isEdit />}</>;
 };
 
 export const getServerSideProps = (ctx: GetServerSidePropsContext) => {

@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 type TRadioObj = {
   value: any;
   label: string;
+  checked?: boolean;
 };
 type Props = {
   form: any;
@@ -25,7 +26,7 @@ const RadioField = (props: Props) => {
           {data.map((item, index) => (
             <FormControlLabel
               key={index}
-              control={<Radio {...field} value={item.value} disabled={disabled} />}
+              control={<Radio {...field} value={item.value} disabled={disabled || item.checked} />}
               label={item.label}
             />
           ))}

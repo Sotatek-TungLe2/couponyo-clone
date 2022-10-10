@@ -10,6 +10,12 @@ import {
 } from '@mui/icons-material';
 
 export const MenuList: PermissionMenuList = {
+  coupon: {
+    path: '/coupon',
+    icon: 'PinDrop',
+    label: 'Creat Coupon',
+    permission: true,
+  },
   issueList: {
     path: '/issues',
     icon: 'NotificationsActive',

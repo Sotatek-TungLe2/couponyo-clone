@@ -1,13 +1,13 @@
-import { FormControl, InputField, RadioField } from '@base/formControl';
+import { FormControl, InputField } from '@base/formControl';
 import styled from '@emotion/styled';
+import { DevTool } from '@hookform/devtools';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, InputAdornment } from '@mui/material';
+import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 
 import {
   CouponBenefits,
@@ -15,7 +15,9 @@ import {
   CouponIssuanceSubject,
   LimitNumberUse,
   MaximumUse,
+  MinimumPayment,
   Ordertype,
+  SubjectsApply,
   UseChanel,
   UseDate,
   UseDay,
@@ -25,34 +27,80 @@ import {
 
 import HeadSubTitle from '@base/Typography/HeadSubTitle';
 import HeadTitle from '@base/Typography/HeadTitle';
-import { StateType } from '@hooks';
 import useFormData from '@hooks/useFormData';
 import PreviewCreateModal from 'components/CouponSpecificationForm/Components/PreviewModal';
 import { schema, Schema } from './utils/schema';
 
 const fieldWidth = 210;
 
-const subjectAll = [
-  { value: 'subjectAll', label: 'All', checked: true },
-  { value: 'subjectFranchise', label: 'Franchise (brand)', checked: false },
-  { value: 'subjectCategory', label: 'Category', checked: false },
-  { value: 'subjectRestaurant', label: 'Restaurant', checked: false },
-  { value: 'subjectYomart', label: 'Yomart', checked: false },
-];
-
 type Props = {
   couponData: Schema;
   isEdit?: boolean;
 };
+const defaultData: Schema = {
+  couponName: '',
+  issuance: {
+    issuanceParent: '',
+    issuanceChild: '',
+    issuancePercent: 0,
+  },
+  issuanceClassification: '',
+  couponBenefits: {
+    typeBenefit: '',
+    benefitValue: 0,
+    maxDiscount: 0,
+  },
+  paymentAcount: 0,
+  limitUse: {
+    isLimitUserActive: false,
+    limitUseValue: 1,
+  },
+  maximumUse: {
+    isMaximumUse: false,
+    maximumUseValue: 0,
+  },
+  subjectsApply: 'subjectAll',
+  oderType: { isOderTypeActive: false, value: 'express' },
+  yogiPass: {
+    isYogipassActive: false,
+    isYogipass: false,
+  },
+  useChanel: {
+    isUseChanelActive: false,
+    app: true,
+    web: true,
+  },
+  // useCityRegion: false,
+  useDay: {
+    isUseDayActive: false,
+    mon: true,
+    tue: true,
+    wed: true,
+    thu: true,
+    fri: true,
+    sat: true,
+    sun: true,
+  },
+  useDate: {
+    dateSelect: undefined || null,
+    value: '',
+  },
+  useTime: {
+    startTime: null,
+    endTime: null,
+    startTimeValue: '',
+    endTimeValue: '',
+  },
+};
 const CouponForm = ({ couponData, isEdit }: Props) => {
-  const { setData } = useFormData();
+  const { isCopy, data, setData, setIsCopy } = useFormData();
   const [formResult, setFormResult] = useState<Schema>();
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const store = useSelector((state: StateType) => state.formReducer);
+  const iniData = isCopy ? data : defaultData;
 
   const form = useForm<Schema>({
-    defaultValues: couponData,
+    defaultValues: isEdit ? couponData : iniData,
     shouldUnregister: false,
     resolver: zodResolver(schema),
   });
@@ -67,9 +115,7 @@ const CouponForm = ({ couponData, isEdit }: Props) => {
 
   const handleConfirmData = () => {
     localStorage.setItem('couponDetail', JSON.stringify(form.getValues()));
-    setData(form.getValues());
     form.reset();
-
     handleClosePreivew();
   };
   const handleSubmit: SubmitHandler<Schema> = (values: Schema) => {
@@ -77,14 +123,20 @@ const CouponForm = ({ couponData, isEdit }: Props) => {
     handleClickOpenPreview();
     // console.log('[ Result Submit] =', values);
   };
+  const handleCancel = () => {
+    setIsCopy(false);
+    form.reset();
+  };
   const handleClickCopy = () => {
+    setIsCopy(true);
     router.push({
-      pathname: '/delivery/',
+      pathname: '/coupon/',
     });
   };
 
   useEffect(() => {
     return () => {
+      setIsCopy(false);
       form.reset();
     };
   }, []);
@@ -102,13 +154,21 @@ const CouponForm = ({ couponData, isEdit }: Props) => {
                 name="couponName"
                 placeholder="Please enter"
                 form={form}
-                inputProps={{ style: { width: '100%' } }}
+                inputProps={{ fullWidth: true }}
               />
             </FormControl>
-            <FormControl id="issuance" label="Coupon issuance subject">
+            <FormControl
+              id="issuance"
+              label="Coupon issuance subject"
+              guildText="Enter the purpose and rate of issuer."
+            >
               <CouponIssuanceSubject form={form} />
             </FormControl>
-            <FormControl id="classification" label="Coupon issuance classification">
+            <FormControl
+              id="classification"
+              label="Coupon issuance classification"
+              guildText="Set up general coupons and unlimited coupons."
+            >
               <CouponIssuanceClassification form={form} />
             </FormControl>
           </Box>
@@ -117,61 +177,91 @@ const CouponForm = ({ couponData, isEdit }: Props) => {
             <HeadSubTitle>Coupon benefits</HeadSubTitle>
             <FormControl
               id="cpBenefits"
-              label="Coupon benefits
-"
+              label="Coupon benefits"
+              guildText="Check that the discount rate or discount amount has been entered correctly."
             >
               <CouponBenefits form={form} />
             </FormControl>
-            <FormControl id="paymentAcount" label="Minimum payment amount">
-              <InputField
-                name="paymentAcount"
-                placeholder="Please enter"
-                form={form}
-                type="number"
-                inputProps={{ endAdornment: <InputAdornment position="end">won</InputAdornment> }}
-              />
+            <FormControl
+              id="paymentAcount"
+              label="Minimum payment amount"
+              guildText="You can enter up to KRW 1,000,000. If there is no input, the default is 0 won."
+            >
+              <MinimumPayment form={form} />
             </FormControl>
-            <FormControl id="limitUse" label="Limit number of uses">
+            <FormControl
+              id="limitUse"
+              label="Limit number of uses"
+              guildText="  If OFF, the default value is 1."
+            >
               <LimitNumberUse form={form} />
             </FormControl>
-            <FormControl id="maximumUse" label="Maximum number of uses">
+            <FormControl
+              id="maximumUse"
+              label="Maximum number of uses"
+              guildText="If OFF, the default is set to unlimited
+"
+            >
               <MaximumUse form={form} />
             </FormControl>
           </Box>
 
           <Box>
             <HeadSubTitle>Subjects to apply coupons</HeadSubTitle>
-            <FormControl id="subjectsApply" label="Subjects to apply coupons">
-              <RadioField
-                name="subjectsApply"
-                label="subjectsApply"
-                form={form}
-                data={subjectAll}
-              />
+            <FormControl
+              id="subjectsApply"
+              label="Subjects to apply coupons"
+              guildText=" Ea Possible to use"
+            >
+              <SubjectsApply form={form} />
             </FormControl>
           </Box>
 
           <Box>
             <HeadSubTitle>Conditions for using coupons</HeadSubTitle>
-            <FormControl id="oderType" label="Order type">
+            <FormControl
+              id="oderType"
+              label="Order type"
+              guildText="Coupon will be applied to the selected order type"
+            >
               <Ordertype form={form} />
             </FormControl>
-            <FormControl id="yogiPass" label="Yogi Pass">
+            <FormControl
+              id="yogiPass"
+              label="Yogi Pass"
+              guildText="Coupons apply to Yogi Pass subscribers"
+            >
               <Yogipass form={form} />
             </FormControl>
-            <FormControl id="useChanel" label="Use channel">
+            <FormControl
+              id="useChanel"
+              label="Use channel"
+              guildText="There is no channel condition settings "
+            >
               <UseChanel form={form} />
             </FormControl>
             {/* <FormControl id="useCityRegion" label="Use City/Region">
               <SwitchField label="" form={form} name="useCityRegion" />
             </FormControl> */}
-            <FormControl id="useDay" label="Use Day">
+            <FormControl
+              id="useDay"
+              label="Use Day"
+              guildText="Coupon will be applied on the selected day of the week "
+            >
               <UseDay form={form} />
             </FormControl>
-            <FormControl id="useDate" label="Use Date">
+            <FormControl
+              id="useDate"
+              label="Use Date"
+              guildText="Coupon will be applied to the date you set "
+            >
               <UseDate name="useDate" label="Use Date" form={form} />
             </FormControl>
-            <FormControl id="useTime" label="Use Time">
+            <FormControl
+              id="useTime"
+              label="Use Time"
+              guildText="Coupons will be applied from {12:00} to {13:00} as setting "
+            >
               <UseTime label="Use Time" form={form} />
             </FormControl>
           </Box>
@@ -186,9 +276,12 @@ const CouponForm = ({ couponData, isEdit }: Props) => {
             <Button variant="contained" type="submit">
               {isEdit ? 'Update' : 'Save'}
             </Button>
-            <Button variant="outlined">Cancel</Button>
+            <Button variant="outlined" onClick={handleCancel}>
+              Cancel
+            </Button>
           </SWrapButton>
         </form>
+        <DevTool control={form.control} /> {/* set up the dev tool */}
       </Box>
       {formResult && (
         <PreviewCreateModal

@@ -9,7 +9,7 @@ type Props = {
 
 export default function HeadTitle({ children }: Props) {
   const SHeadTitle = styled(Typography)`
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 500;
     padding: 10px;
     background-color: ${theme.palette.grey[300]};
