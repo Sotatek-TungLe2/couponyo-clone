@@ -255,7 +255,7 @@ const CouponForm = ({ couponData, isEdit }: Props) => {
               label="Use Date"
               guildText="Coupon will be applied to the date you set "
             >
-              <UseDate name="useDate" label="Use Date" form={form} />
+              <UseDate form={form} />
             </FormControl>
             <FormControl
               id="useTime"
@@ -276,7 +276,7 @@ const CouponForm = ({ couponData, isEdit }: Props) => {
             <Button variant="contained" type="submit">
               {isEdit ? 'Update' : 'Save'}
             </Button>
-            <Button variant="outlined" onClick={handleCancel}>
+            <Button variant="contained" onClick={handleCancel} color="neutral">
               Cancel
             </Button>
           </SWrapButton>
@@ -312,5 +312,8 @@ const SwrapSelectIssuance = styled(Box)`
 `;
 const SWrapButton = styled(SwrapSelectIssuance)`
   justify-content: flex-end;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
 `;
 export default CouponForm;

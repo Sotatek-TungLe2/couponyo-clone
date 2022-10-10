@@ -11,14 +11,12 @@ import { Key, useState } from 'react';
 import { Controller, UseFormReturn } from 'react-hook-form';
 type Props = {
   form: UseFormReturn<Schema>;
-  name: string;
-  label: string;
   disabled?: boolean;
   key?: Key;
 };
 
 const UseDate = (props: Props) => {
-  const { form, name, label, disabled = false, key } = props;
+  const { form, disabled = false } = props;
 
   const [isOpen, setIsOpen] = useState(false);
   const dateData = form.watch('useDate.value') ? JSON.parse(form.watch('useDate.value')) : [];
@@ -48,7 +46,7 @@ const UseDate = (props: Props) => {
           render={({ field: { onChange, value, ...rest } }) => (
             <DesktopDatePicker
               open={isOpen}
-              label={label}
+              label="Choose use date"
               inputFormat="MM/DD/YYYY"
               value={value}
               onChange={(time: Moment | null) => {
@@ -65,8 +63,9 @@ const UseDate = (props: Props) => {
                       color="primary"
                       onClick={() => setIsOpen((isOpen) => !isOpen)}
                       startIcon={<CalendarTodayIcon />}
+                      disabled={disabled}
                     >
-                      Choose use days
+                      Choose use date
                     </SButton>
                   </SWrapper>
                 );
@@ -112,4 +111,5 @@ const SWrapChip = styled.div`
     margin: 5px;
   }
 `;
+
 export default UseDate;

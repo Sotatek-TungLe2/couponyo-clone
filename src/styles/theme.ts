@@ -3,6 +3,21 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/700.css';
 import '@fontsource/noto-sans-kr/400.css';
 import '@fontsource/noto-sans-kr/700.css';
+declare module '@mui/material/styles' {
+  interface Palette {
+    neutral: Palette['primary'];
+  }
+
+  // allow configuration using `createTheme`
+  interface PaletteOptions {
+    neutral?: PaletteOptions['primary'];
+  }
+}
+declare module '@mui/material/Button' {
+  interface ButtonPropsColorOverrides {
+    neutral: true;
+  }
+}
 
 export const theme = createTheme({
   palette: {
@@ -11,6 +26,10 @@ export const theme = createTheme({
       light: '#576873',
       dark: '#151E23',
       contrastText: '#FFFFFF',
+    },
+    neutral: {
+      main: '#64748B',
+      contrastText: '#fff',
     },
     background: {
       default: '#FAFAFA',
@@ -28,7 +47,7 @@ export const theme = createTheme({
       fontWeight: 700,
     },
     caption: {
-      color: 'dimgray'
-    }
+      color: 'dimgray',
+    },
   },
 });

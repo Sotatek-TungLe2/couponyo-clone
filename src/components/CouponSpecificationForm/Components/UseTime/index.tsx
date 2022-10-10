@@ -1,4 +1,4 @@
-import { FormHelperText, TextField } from '@mui/material';
+import { Box, FormHelperText, TextField } from '@mui/material';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
@@ -6,6 +6,7 @@ import moment from 'moment';
 import { Schema } from 'components/CouponSpecificationForm/utils/schema';
 import { Key } from 'react';
 import { Controller, UseFormReturn } from 'react-hook-form';
+import styled from '@emotion/styled';
 type Props = {
   form: UseFormReturn<Schema>;
   label: string;
@@ -32,7 +33,7 @@ const UseTime = (props: Props) => {
   };
 
   return (
-    <>
+    <SWrap>
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <Controller
           name="useTime.startTime"
@@ -55,7 +56,7 @@ const UseTime = (props: Props) => {
           )}
         />
       </LocalizationProvider>
-      <span> - </span>
+      <SSpan> - </SSpan>
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <Controller
           name="useTime.endTime"
@@ -97,8 +98,16 @@ const UseTime = (props: Props) => {
           return <input {...field} hidden />;
         }}
       />
-    </>
+    </SWrap>
   );
 };
 
+const SWrap = styled(Box)`
+  display: flex;
+  align-items: center;
+`;
+const SSpan = styled.div`
+  display: inline-block;
+  margin: 0 5px;
+`;
 export default UseTime;
