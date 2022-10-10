@@ -1,14 +1,16 @@
-import { Chip, TextField, Button } from '@mui/material';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import { Key, useEffect, useState } from 'react';
-import { Controller } from 'react-hook-form';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { DesktopDatePicker } from '@mui/x-date-pickers';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import moment from 'moment';
 import styled from '@emotion/styled';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import { Button, Chip, TextField } from '@mui/material';
+import { DesktopDatePicker } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { Schema } from 'components/CouponSpecificationForm/utils/schema';
+import type { Moment } from 'moment';
+
+import { Key, useState } from 'react';
+import { Controller, UseFormReturn } from 'react-hook-form';
 type Props = {
-  form: any;
+  form: UseFormReturn<Schema>;
   name: string;
   label: string;
   disabled?: boolean;
@@ -17,30 +19,31 @@ type Props = {
 
 const UseDate = (props: Props) => {
   const { form, name, label, disabled = false, key } = props;
-  const [dates, setDates] = useState<string[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const handleChange = (event: any) => {
-    const date = event.format('MM/DD');
 
-    const data = [...dates, date] as string[];
-    console.log(date, dates);
-    if (dates.includes(date)) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dateData = JSON.parse(form.watch('useDate.value')) || [];
+
+  const handleChange = (event: Moment | null) => {
+    if (dateData.length > 30 || event === null) return;
+    const date = event.format('MM/DD');
+    const data = [...dateData, date] as string[];
+    if (dateData.includes(date)) {
       return;
     }
-    setDates(data);
+
+    form.setValue('useDate.value', JSON.stringify(data));
   };
+
   const handleDelete = (data: string) => {
-    const filterData = dates.filter((item) => item !== data);
-    setDates(filterData);
+    const filterData = dateData.filter((item: string) => item !== data);
+    form.setValue('useDate.value', JSON.stringify(filterData));
   };
-  useEffect(() => {
-    form.setValue('useDate', JSON.stringify(dates));
-  }, [dates]);
+
   return (
     <SWrapContainer>
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <Controller
-          name={name}
+          name="useDate.dateSelect"
           control={form.control}
           render={({ field: { onChange, value, ...rest } }) => (
             <DesktopDatePicker
@@ -48,9 +51,9 @@ const UseDate = (props: Props) => {
               label={label}
               inputFormat="MM/DD/YYYY"
               value={value}
-              onChange={(event) => {
-                onChange(event);
-                handleChange(event);
+              onChange={(time: Moment | null) => {
+                onChange(time);
+                handleChange(time);
               }}
               {...rest}
               renderInput={(params) => {
@@ -72,13 +75,20 @@ const UseDate = (props: Props) => {
           )}
         />
       </LocalizationProvider>
-      {!!dates && dates.length > 0 && (
+      {!!dateData && dateData.length > 0 && (
         <SWrapChip>
-          {dates.map((item) => (
+          {dateData.map((item: string) => (
             <Chip key={item} label={item} onDelete={() => handleDelete(item)} />
           ))}
         </SWrapChip>
       )}
+      <Controller
+        name="useDate.value"
+        control={form.control}
+        render={({ field }) => {
+          return <input {...field} hidden />;
+        }}
+      />
     </SWrapContainer>
   );
 };

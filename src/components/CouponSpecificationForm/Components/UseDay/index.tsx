@@ -1,7 +1,8 @@
 import { CheckboxField, SwitchField } from '@base/formControl';
-import { Schema } from 'pages/delivery';
+import { Schema } from 'components/CouponSpecificationForm/utils/schema';
+
 import { useEffect } from 'react';
-import { UseFormReturn, useWatch } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 
 type Tday = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun';
 const days: Tday[] = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
@@ -11,12 +12,12 @@ type Props = {
 };
 
 const UseDay = ({ form }: Props) => {
-  const { control } = form;
-  const isActive = useWatch({
-    control,
-    name: 'useDay.isUseDayActive',
-    defaultValue: false,
-  });
+  // const { control } = form;
+  // const isActive = useWatch({
+  //   control,
+  //   name: 'useDay.isUseDayActive',
+  //   defaultValue: false,
+  // });
 
   const daysWatch = days.map((item) => form.watch(`useDay.${item}`));
 
@@ -26,7 +27,7 @@ const UseDay = ({ form }: Props) => {
     } else {
       form.setValue('useDay.isUseDayActive', true);
     }
-  }, [daysWatch, form, isActive]);
+  }, [daysWatch, form]);
 
   // useEffect(() => {
   //   if (isActive) days.forEach((item: Tday) => form.setValue(`useDay.${item}`, !isActive));

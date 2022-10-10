@@ -1,4 +1,4 @@
-import defaultData, { Schema } from './../pages/delivery';
+import { Schema } from 'components/CouponSpecificationForm/utils/schema';
 import { useCallback } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import type { StateType } from './redux-store';
@@ -18,12 +18,13 @@ interface iDataState {
 
 const initialState: iDataState = {
   data: {
-    name: '',
+    couponName: '',
     issuance: {
       issuanceParent: '',
       issuanceChild: '',
       issuancePercent: 0,
     },
+    issuanceClassification: '',
     couponBenefits: {
       typeBenefit: '',
       benefitValue: 0,
@@ -32,17 +33,24 @@ const initialState: iDataState = {
     paymentAcount: 0,
     limitUse: {
       isLimitUserActive: false,
-      limitUseValue: 0,
+      limitUseValue: 1,
     },
     maximumUse: {
       isMaximumUse: false,
       maximumUseValue: 0,
     },
-    subjectsApply: '',
-    oderType: '',
-    yogiPass: false,
-    useChanel: false,
-    useCityRegion: false,
+    subjectsApply: 'subjectAll',
+    oderType: { isOderTypeActive: false, value: 'express' },
+    yogiPass: {
+      isYogipassActive: false,
+      isYogipass: false,
+    },
+    useChanel: {
+      isUseChanelActive: false,
+      app: true,
+      web: true,
+    },
+    // useCityRegion: false,
     useDay: {
       isUseDayActive: false,
       mon: true,
@@ -53,10 +61,15 @@ const initialState: iDataState = {
       sat: true,
       sun: true,
     },
-    useDate: '',
+    useDate: {
+      dateSelect: undefined || null,
+      value: '["10/8","20/9"]',
+    },
     useTime: {
       startTime: null,
       endTime: null,
+      startTimeValue: '',
+      endTimeValue: '',
     },
   },
 };

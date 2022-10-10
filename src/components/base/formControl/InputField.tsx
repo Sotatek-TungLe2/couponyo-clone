@@ -15,9 +15,12 @@ const InputField = (props: Props) => {
   const { form, name, placeholder, disabled = false, type = 'text', inputProps } = props;
   const { errors } = form.formState;
   const arrayName = name.split('.');
-  const errorFields = arrayName.length > 1 ? !!errors[arrayName[0]]?.[arrayName[1]] : !!errors[arrayName[0]];
+  const errorFields =
+    arrayName.length > 1 ? !!errors[arrayName[0]]?.[arrayName[1]] : !!errors[arrayName[0]];
   const errorMessage =
-    arrayName.length > 1 ? errors[arrayName[0]]?.[arrayName[1]]?.message : errors[arrayName[0]]?.message;
+    arrayName.length > 1
+      ? errors[arrayName[0]]?.[arrayName[1]]?.message
+      : errors[arrayName[0]]?.message;
   return (
     <Controller
       name={name}
@@ -36,6 +39,7 @@ const InputField = (props: Props) => {
           disabled={disabled}
           error={errorFields}
           helperText={errorMessage && errorMessage}
+          FormHelperTextProps={{ margin: 'dense' }}
           size="small"
           placeholder={placeholder}
           type={type}

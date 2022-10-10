@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import {setAuthorization} from "@lib/authorization";
+import { setAuthorization } from '@lib/authorization';
 
 export default function AuthProvider({ children }: WithChildren): JSX.Element {
   const router = useRouter();

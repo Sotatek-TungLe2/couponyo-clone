@@ -1,7 +1,7 @@
 import { InputField, SelectDropdown } from '@base/formControl';
 import styled from '@emotion/styled';
 import { Box } from '@mui/system';
-import { Schema } from 'pages/delivery';
+import { Schema } from 'components/CouponSpecificationForm/utils/schema';
 import React, { useEffect, useState } from 'react';
 import { UseFormReturn, useWatch } from 'react-hook-form';
 
