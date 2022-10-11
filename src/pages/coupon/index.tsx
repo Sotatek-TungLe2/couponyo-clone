@@ -8,12 +8,9 @@ import { StateType } from '@hooks';
 
 const CreateCouponPage: FC = () => {
   const router = useRouter();
-  const { copy } = router.query;
-  const store = useSelector((state: StateType) => state.formReducer);
-
-  const { data } = store;
-
-  return <CouponForm couponData={data} />;
+  const { data: dataFormQuery } = router.query;
+  const dataCopy = dataFormQuery ? JSON.parse((dataFormQuery as string) || '') : {};
+  return <CouponForm couponData={dataCopy} />;
 };
 
 export const getServerSideProps = (ctx: GetServerSidePropsContext) => {

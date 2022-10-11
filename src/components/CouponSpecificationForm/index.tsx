@@ -93,14 +93,19 @@ const defaultData: Schema = {
   },
 };
 const CouponForm = ({ couponData, isEdit }: Props) => {
-  const { isCopy, data, setData, setIsCopy } = useFormData();
   const [formResult, setFormResult] = useState<Schema>();
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const iniData = isCopy ? data : defaultData;
+
+  const isCouponDataEmpty =
+    couponData &&
+    Object.keys(couponData).length === 0 &&
+    Object.getPrototypeOf(couponData) === Object.prototype;
+
+  const initData = isCouponDataEmpty ? defaultData : couponData;
 
   const form = useForm<Schema>({
-    defaultValues: isEdit ? couponData : iniData,
+    defaultValues: isEdit ? couponData : initData,
     shouldUnregister: false,
     resolver: zodResolver(schema),
   });
@@ -124,22 +129,24 @@ const CouponForm = ({ couponData, isEdit }: Props) => {
     // console.log('[ Result Submit] =', values);
   };
   const handleCancel = () => {
-    setIsCopy(false);
-    form.reset();
+    if (isEdit) {
+      form.reset(couponData);
+    } else {
+      form.reset(defaultData);
+    }
   };
   const handleClickCopy = () => {
-    setIsCopy(true);
-    router.push({
-      pathname: '/coupon/',
-    });
+    router.push(
+      {
+        pathname: '/coupon/',
+        query: {
+          data: JSON.stringify(form.getValues()),
+        },
+      },
+      '/coupon',
+      { shallow: true }
+    );
   };
-
-  useEffect(() => {
-    return () => {
-      setIsCopy(false);
-      form.reset();
-    };
-  }, []);
 
   console.log(form.formState.errors);
   return (

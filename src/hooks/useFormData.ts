@@ -65,13 +65,11 @@ type Action = { data: iDataState; type: TAction };
 
 interface iDataState {
   data: iData;
-  copyData: iData;
   isCopy: boolean;
 }
 
 const initialState: iDataState = {
   data: defaultData,
-  copyData: defaultData,
   isCopy: false,
 };
 interface Return {
