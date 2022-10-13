@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosResponseHeaders, Method } from 'axios';
 import qs from 'qs';
-import {getAuthorizationHeader} from "@lib/authorization";
+import { getAuthorizationHeader } from '@lib/authorization';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVICE_API_END_POINT,
@@ -15,7 +15,8 @@ const instance = axios.create({
       arrayFormat: 'comma',
       skipNulls: true,
       allowDots: true,
-      filter: (prefix, value) => (value !== undefined && value !== null && value !== '' ? value : undefined),
+      filter: (prefix, value) =>
+        value !== undefined && value !== null && value !== '' ? value : undefined,
     });
   },
 });
@@ -42,7 +43,9 @@ instance.interceptors.response.use(
       });
     }
 
-    return response.status === 404 ? Promise.resolve({ data: null }) : Promise.reject(response.data);
+    return response.status === 404
+      ? Promise.resolve({ data: null })
+      : Promise.reject(response.data);
   }
 );
 
@@ -65,15 +68,17 @@ function getAttachment(responseHeaders: AxiosResponseHeaders) {
     return null;
   }
 
-  const [matchedAttachedFile] = contentDisposition.split(';').filter((str) => str.includes('filename'));
+  const [matchedAttachedFile] = contentDisposition
+    .split(';')
+    .filter((str) => str.includes('filename'));
   return matchedAttachedFile;
 }
 
 const fetch = async <T>({
-                          method,
-                          url,
-                          options,
-                        }: {
+  method,
+  url,
+  options,
+}: {
   method: Method;
   url: string;
   options?: AxiosRequestConfig;
@@ -125,13 +130,14 @@ export const apiClient = {
         data,
       },
     }),
-  delete: <T>(url: string, params?: any, options?: AxiosRequestConfig) =>
+  delete: <T>(url: string, params?: any, data?: any, options?: AxiosRequestConfig) =>
     fetch<T>({
       method: 'delete',
       url,
       options: {
         ...options,
         params,
+        data,
       },
     }),
 };

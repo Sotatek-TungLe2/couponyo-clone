@@ -204,11 +204,7 @@ const SSRPage: FC = () => {
 
           <Box>
             <HeadSubTitle>Coupon benefits</HeadSubTitle>
-            <FormControl
-              id="cpBenefits"
-              label="Coupon benefits
-"
-            >
+            <FormControl id="cpBenefits" label="Coupon benefits">
               <SwrapSelectIssuance>
                 <SelectDropdown
                   name="couponBenefits.typeBenefit"

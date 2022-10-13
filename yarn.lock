@@ -625,6 +625,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mui/x-data-grid@npm:^5.17.5":
+  version: 5.17.5
+  resolution: "@mui/x-data-grid@npm:5.17.5"
+  dependencies:
+    "@babel/runtime": ^7.18.9
+    "@mui/utils": ^5.10.3
+    clsx: ^1.2.1
+    prop-types: ^15.8.1
+    reselect: ^4.1.6
+  peerDependencies:
+    "@mui/material": ^5.4.1
+    "@mui/system": ^5.4.1
+    react: ^17.0.2 || ^18.0.0
+    react-dom: ^17.0.2 || ^18.0.0
+  checksum: 7db9a241d13ed0b37a1e7c7a495b835d9cb4f86b4d12cc3c55ad6d237823e62380610bc59a8944c24c25f9d6f8be576d131b8f4d5cf5f6ee3358d7063f9243ac
+  languageName: node
+  linkType: hard
+
 "@mui/x-date-pickers@npm:^5.0.3":
   version: 5.0.3
   resolution: "@mui/x-date-pickers@npm:5.0.3"
@@ -2435,6 +2453,7 @@ __metadata:
     "@mui/material": ^5.10.5
     "@mui/styles": ^5.10.3
     "@mui/system": ^5.10.5
+    "@mui/x-data-grid": ^5.17.5
     "@mui/x-date-pickers": ^5.0.3
     "@types/node": 17.0.23
     "@types/qs": ^6.9.7
@@ -4291,6 +4310,13 @@ __metadata:
   version: 3.2.0
   resolution: "regexpp@npm:3.2.0"
   checksum: a78dc5c7158ad9ddcfe01aa9144f46e192ddbfa7b263895a70a5c6c73edd9ce85faf7c0430e59ac38839e1734e275b9c3de5c57ee3ab6edc0e0b1bdebefccef8
+  languageName: node
+  linkType: hard
+
+"reselect@npm:^4.1.6":
+  version: 4.1.6
+  resolution: "reselect@npm:4.1.6"
+  checksum: 3ea1058422904063ec93c8f4693fe33dcb2178bbf417ace8db5b2c797a5875cf357d9308d11ed3942ee22507dd34ecfbf1f3a21340a4f31c206cab1d36ceef31
   languageName: node
   linkType: hard
 

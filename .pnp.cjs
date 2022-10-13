@@ -44,6 +44,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@mui/material", "virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:5.10.5"],\
             ["@mui/styles", "virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:5.10.3"],\
             ["@mui/system", "virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:5.10.5"],\
+            ["@mui/x-data-grid", "virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:5.17.5"],\
             ["@mui/x-date-pickers", "virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:5.0.3"],\
             ["@types/node", "npm:17.0.23"],\
             ["@types/qs", "npm:6.9.7"],\
@@ -959,6 +960,45 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "packagePeers": [\
             "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@mui/x-data-grid", [\
+        ["npm:5.17.5", {\
+          "packageLocation": "./.yarn/cache/@mui-x-data-grid-npm-5.17.5-621ba398f4-7db9a241d1.zip/node_modules/@mui/x-data-grid/",\
+          "packageDependencies": [\
+            ["@mui/x-data-grid", "npm:5.17.5"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:5.17.5", {\
+          "packageLocation": "./.yarn/__virtual__/@mui-x-data-grid-virtual-7b236fa7c8/0/cache/@mui-x-data-grid-npm-5.17.5-621ba398f4-7db9a241d1.zip/node_modules/@mui/x-data-grid/",\
+          "packageDependencies": [\
+            ["@mui/x-data-grid", "virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:5.17.5"],\
+            ["@babel/runtime", "npm:7.19.0"],\
+            ["@mui/material", "virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:5.10.5"],\
+            ["@mui/system", "virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:5.10.5"],\
+            ["@mui/utils", "virtual:28fe3122049af4670a18dfea40af0bbba5d46feecd58d219088b33744d311fbb7af74eb2bdecf70fcba639a9a36118aa842297d85e6334c3de888b01b1a73fbd#npm:5.10.3"],\
+            ["@types/mui__material", null],\
+            ["@types/mui__system", null],\
+            ["@types/react", "npm:18.0.19"],\
+            ["@types/react-dom", "npm:18.0.6"],\
+            ["clsx", "npm:1.2.1"],\
+            ["prop-types", "npm:15.8.1"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:18.2.0"],\
+            ["reselect", "npm:4.1.6"]\
+          ],\
+          "packagePeers": [\
+            "@mui/material",\
+            "@mui/system",\
+            "@types/mui__material",\
+            "@types/mui__system",\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
             "react"\
           ],\
           "linkType": "HARD"\
@@ -3297,6 +3337,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@mui/material", "virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:5.10.5"],\
             ["@mui/styles", "virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:5.10.3"],\
             ["@mui/system", "virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:5.10.5"],\
+            ["@mui/x-data-grid", "virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:5.17.5"],\
             ["@mui/x-date-pickers", "virtual:6502768ebbcf183e6cc33a01d897c552a7af0655e26da94e6fa5b93ea53e42d813deb2509f05d92842a9768f04d7e0ae8c012bcf0e564d7b68d15b4e0819dcd0#npm:5.0.3"],\
             ["@types/node", "npm:17.0.23"],\
             ["@types/qs", "npm:6.9.7"],\
@@ -5454,6 +5495,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/regexpp-npm-3.2.0-2513f32cfc-a78dc5c715.zip/node_modules/regexpp/",\
           "packageDependencies": [\
             ["regexpp", "npm:3.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["reselect", [\
+        ["npm:4.1.6", {\
+          "packageLocation": "./.yarn/cache/reselect-npm-4.1.6-869f318cc3-3ea1058422.zip/node_modules/reselect/",\
+          "packageDependencies": [\
+            ["reselect", "npm:4.1.6"]\
           ],\
           "linkType": "HARD"\
         }]\
