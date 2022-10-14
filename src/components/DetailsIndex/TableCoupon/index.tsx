@@ -25,7 +25,7 @@ interface TableComponentProps {
   handleClickDelete: (selectedRows: selectedRowType) => void;
   handleClickCopy: (selectedRows: selectedRowType) => void;
   handleClickStop: (selectedRows: selectedRowType) => void;
-  handleClickDownload: (selectedRows: selectedRowType) => void;
+  // handleClickDownload: (selectedRows: selectedRowType) => void;
   columns: GridColDef[];
   rows: selectedRowType;
 }

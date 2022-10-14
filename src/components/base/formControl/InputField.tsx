@@ -9,21 +9,34 @@ type Props = {
   disabled?: boolean;
   type?: string;
   inputProps?: any;
+  isFullWidth?: boolean;
 };
 
 const InputField = (props: Props) => {
-  const { form, name, placeholder, disabled = false, type = 'text', inputProps } = props;
+  const {
+    form,
+    name,
+    placeholder,
+    isFullWidth,
+    disabled = false,
+    type = 'text',
+    inputProps,
+  } = props;
   const { errors } = form.formState;
   const arrayName = name.split('.');
-  const errorFields = arrayName.length > 1 ? !!errors[arrayName[0]]?.[arrayName[1]] : !!errors[arrayName[0]];
+  const errorFields =
+    arrayName.length > 1 ? !!errors[arrayName[0]]?.[arrayName[1]] : !!errors[arrayName[0]];
   const errorMessage =
-    arrayName.length > 1 ? errors[arrayName[0]]?.[arrayName[1]]?.message : errors[arrayName[0]]?.message;
+    arrayName.length > 1
+      ? errors[arrayName[0]]?.[arrayName[1]]?.message
+      : errors[arrayName[0]]?.message;
   return (
     <Controller
       name={name}
       control={form.control}
       render={({ field }) => (
         <TextField
+          fullWidth={isFullWidth}
           {...field}
           onChange={
             type === 'number'

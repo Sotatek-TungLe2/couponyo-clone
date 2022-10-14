@@ -1,6 +1,7 @@
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import Link from 'next/link';
 
 export const columnsIssuanceList: GridColDef[] = [
   {
@@ -98,7 +99,11 @@ export const columnsDetailsList: GridColDef[] = [
     field: 'content',
     headerName: 'Content',
     width: 120,
-    renderCell: () => <Button variant="contained">Content</Button>,
+    renderCell: () => (
+      <Link href={`/details-index/coupon-contents/1`}>
+        <Button variant="contained">Content</Button>
+      </Link>
+    ),
     sortable: false,
   },
   {
